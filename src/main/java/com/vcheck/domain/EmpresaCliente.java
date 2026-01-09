@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class EmpresaCliente {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String cnpj;
