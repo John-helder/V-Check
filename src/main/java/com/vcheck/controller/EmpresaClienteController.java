@@ -43,7 +43,7 @@ public class EmpresaClienteController {
     @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable Long id){
 
-        var empresa = service.delete(id);
+        service.delete(id);
 
         return ResponseEntity.noContent().build();
     }
