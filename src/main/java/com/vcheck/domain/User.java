@@ -1,6 +1,7 @@
 package com.vcheck.domain;
 
 import com.vcheck.domain.enumeration.Plano;
+import com.vcheck.dto.UserRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,4 +21,11 @@ public class User {
     private Plano plano;
     private Boolean ativo;
 
+    public User(UserRequestDTO dto) {
+        this.nome = dto.nome();
+        this.email = dto.email();
+        this.senha = dto.senha();
+        this.plano = Plano.fromString(dto.plano());
+        this.ativo = Boolean.TRUE;
+    }
 }
