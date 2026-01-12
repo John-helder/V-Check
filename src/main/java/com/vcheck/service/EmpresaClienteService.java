@@ -6,6 +6,7 @@ import com.vcheck.dto.EmpresaClienteResponseDTO;
 import com.vcheck.dto.EmpresaUpdateDTO;
 import com.vcheck.infra.exception.ValidacaoException;
 import com.vcheck.repository.EmpresaClienteRepository;
+import com.vcheck.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,13 +18,18 @@ public class EmpresaClienteService {
 
     @Autowired
     private EmpresaClienteRepository repository;
+    @Autowired
+    private UserRepository userRepository;
 
     public EmpresaClienteResponseDTO create(EmpresaClienteRequestDTO dto){
 
         if(this.repository.existsByCnpj(dto.cnpj()))
             throw new RuntimeException("CNPJ já cadastrado em nossa base de dados.");
 
+        var user = userRepository.findById(dto.consultorId()).orElseThrow(() -> new ValidacaoException("Consultor não identificado"));
+
         EmpresaCliente empresa = new EmpresaCliente(dto);
+        empresa.setConsultor(user);
 
         var empresaCadastrada = repository.save(empresa);
         return new EmpresaClienteResponseDTO(empresaCadastrada);
