@@ -26,11 +26,10 @@ public class UserService {
         var usuarioCadastrado = userRepository.save(user);
 
         return new UserResponseDTO(usuarioCadastrado);
-
     }
 
     public Page<UserResponseDTO> listAll(Pageable pageable) {
-        return this.userRepository.findAll(pageable).map(UserResponseDTO::new);
+        return this.userRepository.findByAtivoTrue(pageable).map(UserResponseDTO::new);
     }
 
     public UserResponseDTO findByUser(Long id) {
