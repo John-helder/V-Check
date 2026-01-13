@@ -25,6 +25,7 @@ public class Fornecedor {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empresa_id", nullable = false)
     private EmpresaCliente empresa;
+    private Boolean ativo = true;
 
     public Fornecedor(FornecedorRequestDTO dto) {
         this.nome = dto.nome();

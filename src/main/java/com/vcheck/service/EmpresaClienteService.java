@@ -38,10 +38,10 @@ public class EmpresaClienteService {
 
     public Page<EmpresaClienteResponseDTO> getAll(Pageable pageable) {
 
-        return repository.findAll(pageable).map(EmpresaClienteResponseDTO::new);
+        return repository.findByAtivoTrue(pageable).map(EmpresaClienteResponseDTO::new);
     }
 
-    public EmpresaClienteResponseDTO getbyEmpresa(Long id) {
+    public EmpresaClienteResponseDTO getByEmpresa(Long id) {
 
         var empresa = repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Identificador não encontrado."));
 
