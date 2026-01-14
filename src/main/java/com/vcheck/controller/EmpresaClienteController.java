@@ -42,7 +42,7 @@ public class EmpresaClienteController {
     @GetMapping("/{id}")
     public ResponseEntity<EmpresaClienteResponseDTO> findByEmpresa(@PathVariable Long id){
 
-        var empresa = service.getbyEmpresa(id);
+        var empresa = service.getByEmpresa(id);
 
         return ResponseEntity.ok().body(empresa);
     }
