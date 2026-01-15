@@ -23,6 +23,8 @@ public class EmpresaCliente {
     @JoinColumn(name = "consultor_id", nullable = false)
     private User consultor;
 
+    private Boolean ativo = true;
+
     public EmpresaCliente(EmpresaClienteRequestDTO dto) {
         this.cnpj = dto.cnpj();
         this.nome = dto.nome();
