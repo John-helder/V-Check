@@ -1,10 +1,9 @@
 package com.vcheck.controller;
 
-import com.vcheck.domain.Documento;
 import com.vcheck.dto.DocumentoRequestDTO;
 import com.vcheck.dto.DocumentoResponseDTO;
-import com.vcheck.repository.DocumentoRepository;
 import com.vcheck.service.DocumentoService;
+import jakarta.transaction.Transactional;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,6 +21,7 @@ public class DocumentoController {
     private DocumentoService service;
 
     @PostMapping
+    @Transactional
     public ResponseEntity<DocumentoResponseDTO> create(@RequestBody DocumentoRequestDTO request, UriComponentsBuilder uriBuilder){
         var documento = service.create(request);
 
@@ -47,5 +47,13 @@ public class DocumentoController {
 
 
         return ResponseEntity.ok().body(documento);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity deleteDocumento(@PathVariable Long id){
+        service.deleteDocumento(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
