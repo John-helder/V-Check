@@ -41,4 +41,10 @@ public class DocumentoService {
 
         return new DocumentoResponseDTO(documento);
     }
+
+    public void deleteDocumento(Long id) {
+        var documento = documentoRepository.findById(id).orElseThrow(() -> new  ValidacaoException("Documento não encontrado."));
+
+        documento.setAtivo(false);
+    }
 }
